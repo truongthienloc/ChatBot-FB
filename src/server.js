@@ -6,13 +6,12 @@ import webRoutes from "./routes/web";
 
 const app = express();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended : true }));
 //config view engine
 viewEngine(app);
 //config web routes
 webRoutes(app);
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended : true }));
 
 const port = process.env.PORT || 8080;
 
