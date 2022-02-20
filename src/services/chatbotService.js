@@ -24,21 +24,21 @@ function callSendAPI(sender_psid, response) {
         }
     }); 
 }
-const getUserName = (sender_psid) => new Promise(async(resolve, reject) => {
+const getUserName = (sender_psid) => new Promise((resolve, reject) => {
     let response = {};
     // Send the HTTP request to the Messenger Platform
-    await request({
+    request({
         "uri": `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}`,
         "qs": { "access_token": PAGE_ACCESS_TOKEN },
         "method": "GET",
     }, (err, res, body) => {
         console.log(body);
-        //console.log("res: ", res);
         response = JSON.parse(body);
+        const username = `${response.last_name} ${response.first_name}`;
+        
+        resolve(username);
     }); 
 
-    const username = `${response.last_name} ${response.first_name}`;
-    resolve(username);
 })
 
 const handleGetStarted = (sender_psid) => {
