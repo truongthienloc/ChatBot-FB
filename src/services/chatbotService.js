@@ -24,11 +24,27 @@ function callSendAPI(sender_psid, response) {
         }
     }); 
 }
+const getUserName = async(sender_psid) => {
+    let response = {};
+    // Send the HTTP request to the Messenger Platform
+    await request({
+        "uri": `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}`,
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "GET",
+    }, (err, res, body) => {
+        console.log(body);
+        response = JSON.parse(res);
+    }); 
+
+    const username = `${response.last_name} ${response.first_name}`;
+    return username;
+}
 
 const handleGetStarted = (sender_psid) => {
     return new Promise(async(resolve, reject) => {
         try {
-            const response = {"text" : "Chào bạn, tôi có thể giúp gì cho bạn?"}
+            const username = await getUserName(sender_psid);
+            const response = {"text" : `Chào ${username}, tôi có thể giúp gì cho bạn?`}
             await callSendAPI(sender_psid, response);
             resolve("response");
         } catch (e) {
