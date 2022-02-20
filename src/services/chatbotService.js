@@ -26,11 +26,11 @@ function callSendAPI(sender_psid, response) {
 }
 
 const handleGetStarted = (sender_psid) => {
-    return Promise(async(resolve, reject) => {
+    return new Promise(async(resolve, reject) => {
         try {
             const response = {"text" : "Chào bạn, tôi có thể giúp gì cho bạn?"}
             await callSendAPI(sender_psid, response);
-            resolve(response);
+            resolve("response");
         } catch (e) {
             reject(e);
         }
