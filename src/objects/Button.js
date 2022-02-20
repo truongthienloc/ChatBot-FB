@@ -1,8 +1,12 @@
-export default function(type, title, payload) {
-    this.type = type;
+export function Button(title, payload) {
+    this.type = buttonType.POSTBACK;
     this.title = title;
     this.payload = payload;
-    this.url = payload;
+}
+export function ButtonURL(title, url) {
+    this.type = buttonType.WEB_URL;
+    this.title = title,
+    this.url = url;
 }
 export const buttonType = {
     POSTBACK : "postback",

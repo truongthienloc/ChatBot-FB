@@ -3,12 +3,12 @@ import request from "request";
 import { PAGE_ACCESS_TOKEN } from "../constants/envConstants";
 import GenericTemplate, {Element} from "../objects/GenericTemplate";
 import ButtonTemplate from "../objects/ButtonTemplate";
-import Button, {buttonType} from "../objects/Button";
+import { Button, ButtonURL} from "../objects/Button";
 
 const option_1 = JSON.stringify({
     attachment : new ButtonTemplate("Chọn 1 trong các lựa chọn bên dưới: ", [
-        new Button(buttonType.POSTBACK, "Xem hàng", "show_product"), 
-        new Button(buttonType.WEB_URL, "Vào website", "https://cong-nghe.herokuapp.com/")
+        new Button("Xem hàng", "show_product"), 
+        new ButtonURL("Vào website", "https://cong-nghe.herokuapp.com/")
     ])
 });
 
