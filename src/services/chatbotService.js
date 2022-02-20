@@ -1,6 +1,16 @@
 require("dotenv").config();
 import request from "request";
 import { PAGE_ACCESS_TOKEN } from "../constants/envConstants";
+import GenericTemplate, {Element} from "../objects/GenericTemplate";
+import ButtonTemplate from "../objects/ButtonTemplate";
+import Button, {buttonType} from "../objects/Button";
+
+const option_1 = JSON.stringify({
+    attachment : new ButtonTemplate("Chọn 1 trong các lựa chọn bên dưới: ", [
+        new Button(buttonType.POSTBACK, "Xem hàng", "show_product"), 
+        new Button(buttonType.WEB_URL, "Vào website", "https://cong-nghe.herokuapp.com/")
+    ])
+});
 
 function callSendAPI(sender_psid, response) {
     // Construct the message body
@@ -35,7 +45,7 @@ const getUserName = (sender_psid) => new Promise((resolve, reject) => {
         console.log(body);
         response = JSON.parse(body);
         const username = `${response.last_name} ${response.first_name}`;
-        
+
         resolve(username);
     }); 
 
@@ -45,8 +55,11 @@ const handleGetStarted = (sender_psid) => {
     return new Promise(async(resolve, reject) => {
         try {
             const username = await getUserName(sender_psid);
-            const response = {"text" : `Chào ${username}, tôi có thể giúp gì cho bạn?`}
-            await callSendAPI(sender_psid, response);
+            const responseFirst = {"text" : `Chào ${username}, tôi có thể giúp gì cho bạn?`}
+            await callSendAPI(sender_psid, responseFirst);
+
+            const responseSecond = option_1;
+            await callSendAPI(sender_psid, responseSecond);
             resolve("response");
         } catch (e) {
             reject(e);
