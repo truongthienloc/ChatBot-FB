@@ -24,7 +24,7 @@ function callSendAPI(sender_psid, response) {
         }
     }); 
 }
-const getUserName = async(sender_psid) => {
+const getUserName = (sender_psid) => new Promise(async(resolve, reject) => {
     let response = {};
     // Send the HTTP request to the Messenger Platform
     await request({
@@ -33,13 +33,13 @@ const getUserName = async(sender_psid) => {
         "method": "GET",
     }, (err, res, body) => {
         console.log(body);
-        console.log("res: ", res);
+        //console.log("res: ", res);
         response = JSON.parse(body);
     }); 
 
     const username = `${response.last_name} ${response.first_name}`;
-    return username;
-}
+    resolve(username);
+})
 
 const handleGetStarted = (sender_psid) => {
     return new Promise(async(resolve, reject) => {
