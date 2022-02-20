@@ -1,8 +1,35 @@
 require("dotenv").config();
 import request from "request";
 
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+
 const getHomePage = (req, res) => {
     return res.render("homepage.ejs");
+}
+
+const setupProfile = async(req, res) => {
+    let request_body = {
+        "get_started": {
+            "payload": "get_started"
+        },
+        "whitelisted_domains": ["https://cong-nghe.herokuapp.com/"]
+    }
+    // Send the HTTP request to the Messenger Platform
+    await request({
+        "uri": `https://graph.facebook.com/v13.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}`,
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+    }, (err, res, body) => {
+        //console.log(body);
+        if (!err) {
+            console.log('Set up success!')
+        } else {
+            console.error("Set up fail:" + err);
+        }
+    });
+
+    return res.send("Set up success!");
 }
 
 const postWebhook = (req, res) => {
@@ -154,5 +181,6 @@ function callSendAPI(sender_psid, response) {
 module.exports = {
     getHomePage,
     postWebhook,
-    getWebhook
+    getWebhook,
+    setupProfile,
 }
