@@ -33,7 +33,8 @@ const getUserName = async(sender_psid) => {
         "method": "GET",
     }, (err, res, body) => {
         console.log(body);
-        response = JSON.parse(res);
+        console.log("res: ", res);
+        response = JSON.parse(body);
     }); 
 
     const username = `${response.last_name} ${response.first_name}`;
