@@ -1,7 +1,6 @@
 require("dotenv").config();
 import request from "request";
-
-const ADMIN_PSID = process.env.ADMIN_PSID;
+import { PAGE_ACCESS_TOKEN, ADMIN_PSID } from "../constants/envConstants";
 
 function callSendAPI(sender_psid, response) {
     // Construct the message body
