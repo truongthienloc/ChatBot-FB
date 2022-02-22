@@ -184,7 +184,6 @@ async function handlePostback(sender_psid, received_postback) {
             })
             break;
         case "persistent_menu_Finance":
-            console.log(option_Finance);
             callSendAPI(sender_psid, option_Finance);
             break;
         case "persistent_menu_Shopping":
@@ -222,6 +221,7 @@ function callSendAPI(sender_psid, response) {
         "method": "POST",
         "json": request_body
     }, (err, res, body) => {
+        console.log(body);
         if (!err) {
             console.log('message sent!')
         } else {
