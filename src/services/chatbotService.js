@@ -22,7 +22,8 @@ const option_1 = JSON.stringify({
 const option_Finance = {
     "attachment" : GenericTemplate([
         Element("Tài chính", 
-        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fdnbvietnam.com%2Ftu-van%2Fdanh-gia-hieu-qua-tai-chinh-cua-doanh-nghiep.html&psig=AOvVaw01xx8UseCGSpjUGyumEYL5&ust=1645606275455000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCKCWoKj3kvYCFQAAAAAdAAAAABAD", "", [
+        "https://dnbvietnam.com/Uploads/images/news/hieu-qua-tai-chinh-doanh-nghiep-la-gi.jpg",
+        "Chọn 1 trong những lựa chọn sau: ", [
             Button("Ví điện tử", "digital_wallet"),
             Button("Đầu tư", "invest"),
             Button("Vay tiền", "borrow_money")
