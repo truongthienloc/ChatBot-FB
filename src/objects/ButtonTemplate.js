@@ -1,8 +1,10 @@
 export default function(text, buttons = []) {
-    this.type = "template",
-    this.payload = {
-        template_type : "button",
-        text,
-        buttons,
-    }
+    return ({
+        "type" : "template",
+        "payload" : {
+            "template_type" : "button",
+            "text" : text,
+            "buttons" : buttons
+        }
+    })
 }

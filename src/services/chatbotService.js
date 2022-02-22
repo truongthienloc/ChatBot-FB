@@ -12,12 +12,12 @@ const checkMessage = (message) => {
     return "unknown";
 }
 
-const option_1 = JSON.stringify({
-    attachment : new ButtonTemplate("Chọn 1 trong các lựa chọn bên dưới: ", [
-        new Button("Trợ giúp", "show_help"), 
+const option_1 = {
+    "attachment" : ButtonTemplate("Chọn 1 trong các lựa chọn bên dưới: ", [
+        Button("Trợ giúp", "show_help"), 
         //new ButtonURL("Vào website", "https://cong-nghe.herokuapp.com/")
     ])
-});
+};
 
 const option_Finance = {
     "attachment" : GenericTemplate([
