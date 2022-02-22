@@ -187,16 +187,16 @@ async function handlePostback(sender_psid, received_postback) {
             //console.log("option_Finance: ", option_Finance);
             callSendAPI(sender_psid, option_Finance);
             break;
-        case "persistent_menu_Shopping":
-            break;
-        case "persistent_menu_Technology":
-            break;
-        case "digital_wallet":
-            break;
-        case "invest":
-            break;
-        case "borrow_money":
-            break;
+        // case "persistent_menu_Shopping":
+        //     break;
+        // case "persistent_menu_Technology":
+        //     break;
+        // case "digital_wallet":
+        //     break;
+        // case "invest":
+        //     break;
+        // case "borrow_money":
+        //     break;
         default:
             callSendAPI(sender_psid, {"text":"Chức năng sẽ được thêm trong tương lai"});
             break;
