@@ -6,10 +6,12 @@ export default function(elements = []) {
     }
     
 }
-export function Element(title, image_url, subtitle, buttons = [], default_action) {
-    this.title = title;
-    this.image_url = image_url;
-    this.subtitle = subtitle;
-    this.buttons = buttons;
-    this.default_action = default_action;
+export function Element(title, image_url, subtitle, buttons = [], default_action = null) {
+    
+    if(default_action)return ({
+        title, image_url, subtitle, buttons, default_action
+    })
+    else return ({
+        title, image_url, subtitle, buttons
+    })
 }
