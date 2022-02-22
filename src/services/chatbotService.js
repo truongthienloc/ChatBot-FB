@@ -5,6 +5,13 @@ import GenericTemplate, {Element} from "../objects/GenericTemplate";
 import ButtonTemplate from "../objects/ButtonTemplate";
 import { Button, ButtonURL} from "../objects/Button";
 
+const checkMessage = (message) => {
+    if(message.slice(0,8).toLowerCase() === "feedback")
+        return "feedback";
+    
+    return "unknown";
+}
+
 const option_1 = JSON.stringify({
     attachment : new ButtonTemplate("Chọn 1 trong các lựa chọn bên dưới: ", [
         new Button("Xem hàng", "show_product"), 
@@ -70,4 +77,5 @@ const handleGetStarted = (sender_psid) => {
 
 module.exports = {
     handleGetStarted,
+    checkMessage,
 }

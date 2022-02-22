@@ -1,7 +1,8 @@
 require("dotenv").config();
 import request from "request";
 import { PAGE_ACCESS_TOKEN } from "../constants/envConstants";
-import { handleGetStarted } from "../services/chatbotService";
+import { handleGetStarted, checkMessage } from "../services/chatbotService";
+import { sendFeedback } from "../services/adminService";
 const getHomePage = (req, res) => {
     return res.render("homepage.ejs");
 }
@@ -97,12 +98,16 @@ function handleMessage(sender_psid, received_message) {
 
     // Check if the message contains text
     if (received_message.text) {
-
-        // Create the payload for a basic text message
-        response = {
-            "text": `You sent the message: "${received_message.text}". Now send me an image!`
+        const text = received_message.text;
+        switch(checkMessage(text)) {
+            case "feedback":
+                sendFeedback(sender_psid, text.slice(8));
+                response = {"text": `Cám ơn bạn đã gửi feedback.`};
+                break;
         }
-    } else if (received_message.attachments) {
+        // Create the payload for a basic text message
+        
+    } else if (received_message.attachments) { // file đính kèm
         // Get the URL of the message attachment
         let attachment_url = received_message.attachments[0].payload.url;
         response = {
