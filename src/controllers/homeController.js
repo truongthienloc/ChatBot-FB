@@ -184,6 +184,7 @@ async function handlePostback(sender_psid, received_postback) {
             })
             break;
         case "persistent_menu_Finance":
+            console.log(option_Finance);
             callSendAPI(sender_psid, option_Finance);
             break;
         case "persistent_menu_Shopping":
