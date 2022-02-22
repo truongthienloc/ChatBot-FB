@@ -3,17 +3,42 @@ import request from "request";
 import { PAGE_ACCESS_TOKEN } from "../constants/envConstants";
 import { handleGetStarted, checkMessage } from "../services/chatbotService";
 import { sendFeedback } from "../services/adminService";
+import { Button } from "../objects/Button";
 const getHomePage = (req, res) => {
     return res.render("homepage.ejs");
 }
 
 const setupProfile = async(req, res) => {
+
     let request_body = {
-        "get_started": {
-            "payload": "get_started"
+        "get_started":{
+            "payload":"get_started"
         },
-        "whitelisted_domains": ["https://cong-nghe.herokuapp.com/"]
+        "whitelisted_domains" : ["https://cong-nghe.herokuapp.com/"],
+        "persistent_menu" : [
+            {
+                "locale": "default",
+                "composer_input_disabled": false,
+                "call_to_actions" : [{
+                    "type": "postback",
+                    "title": "Tài chính",
+                    "payload": "persistent_menu_Finance"
+                },{
+                    "type": "postback",
+                    "title": "Mua sắm",
+                    "payload": "persistent_menu_Shopping"
+                },{
+                    "type": "postback",
+                    "title": "Công nghệ",
+                    "payload": "persistent_menu_Technology"
+                }],
+            }
+        ]
+        
     }
+
+    console.log("request_body: ", request_body);
+
     // Send the HTTP request to the Messenger Platform
     await request({
         "uri": `https://graph.facebook.com/v13.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}`,
@@ -21,7 +46,7 @@ const setupProfile = async(req, res) => {
         "method": "POST",
         "json": request_body
     }, (err, res, body) => {
-        //console.log(body);
+        console.log(body);
         if (!err) {
             console.log('Set up success!')
         } else {
@@ -101,7 +126,7 @@ function handleMessage(sender_psid, received_message) {
         const text = received_message.text;
         switch(checkMessage(text)) {
             case "feedback":
-                sendFeedback(sender_psid, text.slice(8));
+                sendFeedback(sender_psid, text.slice(9));
                 response = {"text": `Cám ơn bạn đã gửi feedback.`};
                 break;
         }
@@ -150,16 +175,11 @@ async function handlePostback(sender_psid, received_postback) {
 
     // Set the response based on the postback payload
     switch (payload) {
-        case "yes":
-            response = { "text": "Thanks!" }
-            break;
-        case "no":
-            response = { "text": "Oops, try sending another image." }
-            break;
         case "get_started":
             await handleGetStarted(sender_psid);
             break;
         default:
+            callSendAPI(sender_psid, {"text":"Chức năng sẽ được thêm trong tương lai"});
             break;
     }
     

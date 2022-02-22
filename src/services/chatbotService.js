@@ -3,7 +3,7 @@ import request from "request";
 import { PAGE_ACCESS_TOKEN } from "../constants/envConstants";
 import GenericTemplate, {Element} from "../objects/GenericTemplate";
 import ButtonTemplate from "../objects/ButtonTemplate";
-import { Button, ButtonURL} from "../objects/Button";
+import { Button, ButtonURL } from "../objects/Button";
 
 const checkMessage = (message) => {
     if(message.slice(0,8).toLowerCase() === "feedback")
