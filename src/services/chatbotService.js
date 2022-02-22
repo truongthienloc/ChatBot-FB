@@ -14,10 +14,24 @@ const checkMessage = (message) => {
 
 const option_1 = JSON.stringify({
     attachment : new ButtonTemplate("Chọn 1 trong các lựa chọn bên dưới: ", [
-        new Button("Xem hàng", "show_product"), 
-        new ButtonURL("Vào website", "https://cong-nghe.herokuapp.com/")
+        new Button("Trợ giúp", "show_help"), 
+        //new ButtonURL("Vào website", "https://cong-nghe.herokuapp.com/")
     ])
 });
+
+const option_Finance = JSON.stringify({
+    "attachment":{
+        "type":"template",
+        "payload" : new GenericTemplate([
+            new Element("Tài chính", 
+            "https://www.google.com/url?sa=i&url=https%3A%2F%2Fdnbvietnam.com%2Ftu-van%2Fdanh-gia-hieu-qua-tai-chinh-cua-doanh-nghiep.html&psig=AOvVaw01xx8UseCGSpjUGyumEYL5&ust=1645606275455000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCKCWoKj3kvYCFQAAAAAdAAAAABAD", "", [
+                new Button("Ví điện tử", "digital_wallet"),
+                new Button("Đầu tư", "invest"),
+                new Button("Vay tiền", "borrow_money")
+            ])
+        ])
+    }
+})
 
 function callSendAPI(sender_psid, response) {
     // Construct the message body
@@ -78,4 +92,5 @@ const handleGetStarted = (sender_psid) => {
 module.exports = {
     handleGetStarted,
     checkMessage,
+    option_Finance,
 }

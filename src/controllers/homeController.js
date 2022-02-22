@@ -1,7 +1,7 @@
 require("dotenv").config();
 import request from "request";
 import { PAGE_ACCESS_TOKEN } from "../constants/envConstants";
-import { handleGetStarted, checkMessage } from "../services/chatbotService";
+import { handleGetStarted, checkMessage, option_Finance } from "../services/chatbotService";
 import { sendFeedback } from "../services/adminService";
 import { Button } from "../objects/Button";
 const getHomePage = (req, res) => {
@@ -177,6 +177,24 @@ async function handlePostback(sender_psid, received_postback) {
     switch (payload) {
         case "get_started":
             await handleGetStarted(sender_psid);
+            break;
+        case "show_help":
+            callSendAPI(sender_psid, {
+                "text" : "- Bạn có thể ấn vào nút menu ở góc dưới bên phải để sử dụng những chức năng chính.\n- Nếu như bạn có một phải hồi gì hãy sử dụng cú pháp: feedback + <điều bạn muốn phản hồi>.\n"
+            })
+            break;
+        case "persistent_menu_Finance":
+            callSendAPI(sender_psid, option_Finance);
+            break;
+        case "persistent_menu_Shopping":
+            break;
+        case "persistent_menu_Technology":
+            break;
+        case "digital_wallet":
+            break;
+        case "invest":
+            break;
+        case "borrow_money":
             break;
         default:
             callSendAPI(sender_psid, {"text":"Chức năng sẽ được thêm trong tương lai"});
