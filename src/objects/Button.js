@@ -1,12 +1,19 @@
 export function Button(title, payload) {
-    this.type = buttonType.POSTBACK;
-    this.title = title;
-    this.payload = payload;
+    return ({
+        "type" : buttonType.POSTBACK,
+        "title" : title,
+        "payload" : payload
+    })
 }
 export function ButtonURL(title, url) {
     this.type = buttonType.WEB_URL;
     this.title = title,
     this.url = url;
+    return ({
+        "type" : buttonType.WEB_URL,
+        "title" : title,
+        "url" : url
+    })
 }
 export const buttonType = {
     POSTBACK : "postback",

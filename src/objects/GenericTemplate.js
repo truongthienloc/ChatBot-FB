@@ -1,17 +1,25 @@
 export default function(elements = []) {
-    this.type = "template";
-    this.payload = {
-        template_type : "generic",
-        elements,
-    }
-    
+    return ({
+        "type" : "template",
+        "payload" : {
+            "template_type" : "generic",
+            "elements" : elements
+        }
+    })
 }
 export function Element(title, image_url, subtitle, buttons = [], default_action = null) {
     
-    if(default_action)return ({
-        title, image_url, subtitle, buttons, default_action
+    if(default_action) return ({
+        "title" : title, 
+        "image_url" : image_url, 
+        "subtitle" : subtitle, 
+        "buttons" : buttons, 
+        "default_action" : default_action,
     })
     else return ({
-        title, image_url, subtitle, buttons
+        "title" : title, 
+        "image_url" : image_url, 
+        "subtitle" : subtitle, 
+        "buttons" : buttons
     })
 }
