@@ -1,5 +1,5 @@
 import GenericTemplate, {Element} from "../../objects/GenericTemplate";
-import { Button, ButtonURL } from "../objects/Button";
+import { Button, ButtonURL } from "../../objects/Button";
 // const BUTTON = {
 //     name : "",
 //     payload : "",
