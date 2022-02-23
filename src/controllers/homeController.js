@@ -1,7 +1,8 @@
 require("dotenv").config();
 import request from "request";
 import { PAGE_ACCESS_TOKEN } from "../constants/envConstants";
-import { handleGetStarted, checkMessage, option_Finance } from "../services/chatbotService";
+import { handleGetStarted, checkMessage, option_Finance, handleDigitalWallet
+} from "../services/chatbotService";
 import { sendFeedback } from "../services/adminService";
 import { Button } from "../objects/Button";
 const getHomePage = (req, res) => {
@@ -191,8 +192,9 @@ async function handlePostback(sender_psid, received_postback) {
         //     break;
         // case "persistent_menu_Technology":
         //     break;
-        // case "digital_wallet":
-        //     break;
+        case "digital_wallet":
+            handleDigitalWallet(sender_psid);
+            break;
         // case "invest":
         //     break;
         // case "borrow_money":
