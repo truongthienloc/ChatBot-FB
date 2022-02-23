@@ -4,7 +4,6 @@ import { PAGE_ACCESS_TOKEN } from "../constants/envConstants";
 import GenericTemplate, {Element} from "../objects/GenericTemplate";
 import ButtonTemplate from "../objects/ButtonTemplate";
 import { Button, ButtonURL } from "../objects/Button";
-import { response } from "express";
 
 import { option_digitalWallet } from "../public/data/digital_wallet";
 
@@ -92,7 +91,7 @@ const handleGetStarted = (sender_psid) => {
 }
 
 const handleDigitalWallet = (sender_psid) => {
-    response = {
+    let response = {
         "attachment" : option_digitalWallet
     }
     callSendAPI(sender_psid, response);
