@@ -30,7 +30,7 @@ const option_Finance = {
             Button("Ví điện tử", "digital_wallet"),
             Button("Đầu tư", "invest"),
             //Button("Vay tiền", "borrow_money")
-            Button("Internet Banking")
+            Button("Internet Banking", "internet_banking")
         ])
     ])
 }
