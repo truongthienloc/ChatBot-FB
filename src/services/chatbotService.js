@@ -5,6 +5,8 @@ import GenericTemplate, {Element} from "../objects/GenericTemplate";
 import ButtonTemplate from "../objects/ButtonTemplate";
 import { Button, ButtonURL } from "../objects/Button";
 
+import { customerFinance } from "../firebase/index";
+
 import { option_digitalWallet, message_VNPAY, option_VNPAY } from "../public/data/digital_wallet";
 
 const checkMessage = (message) => {
@@ -71,7 +73,32 @@ const getUserName = (sender_psid) => new Promise((resolve, reject) => {
 
         resolve(username);
     }); 
-
+})
+const getGender = (sender_psid) => new Promise((resolve, reject) => {
+    let response = {};
+    request({
+        "uri": `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}`,
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "GET",
+    }, (err, res, body) => {
+        //console.log(body);
+        response = JSON.parse(body);
+        const gender = response.gender;
+        resolve(gender);
+    }); 
+})
+const getProfilePic = (sender_psid) => new Promise((resolve, reject) => {
+    let response = {};
+    request({
+        "uri": `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}`,
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "GET",
+    }, (err, res, body) => {
+        //console.log(body);
+        response = JSON.parse(body);
+        const profile_pic = response.profile_pic;
+        resolve(profile_pic);
+    }); 
 })
 
 const handleGetStarted = (sender_psid) => {
@@ -96,7 +123,19 @@ const handleDigitalWallet = (sender_psid) => {
     }
     callSendAPI(sender_psid, response);
 }
-const handleShowVNPAY = (sender_psid) => {
+const handleShowVNPAY = async(sender_psid) => {
+    const username = getUserName(sender_psid);
+    const gender = getGender(sender_psid);
+    const profile_pic = getProfilePic(sender_psid);
+    const data = {
+        appName : "VNPAY",
+        date : new Date(),
+        gender,
+        name : username,
+        profile_pic,
+        psid : sender_psid
+    }
+    customerFinance.add(data);
     let response = message_VNPAY;
     callSendAPI(response);
     response = {
