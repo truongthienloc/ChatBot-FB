@@ -25,6 +25,7 @@ const customerFinance = collection(database, "Customer_Finance");
 // const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 const addCustomerFinance = (data) => {
+    console.log(data)
     addDoc(customerFinance, data);
 }
 module.exports = {
