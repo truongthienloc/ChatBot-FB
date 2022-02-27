@@ -1,7 +1,7 @@
 require("dotenv").config();
 import request from "request";
 import { PAGE_ACCESS_TOKEN } from "../constants/envConstants";
-import { handleGetStarted, checkMessage, option_Finance, handleDigitalWallet
+import { handleGetStarted, checkMessage, option_Finance, handleDigitalWallet, handleShowVNPAY
 } from "../services/chatbotService";
 import { sendFeedback } from "../services/adminService";
 import { Button } from "../objects/Button";
@@ -199,6 +199,9 @@ async function handlePostback(sender_psid, received_postback) {
         //     break;
         // case "borrow_money":
         //     break;
+        case "show_VNPAY":
+            handleShowVNPAY(sender_psid);
+            break;
         default:
             callSendAPI(sender_psid, {"text":"Chức năng sẽ được thêm trong tương lai"});
             break;

@@ -5,7 +5,7 @@ import GenericTemplate, {Element} from "../objects/GenericTemplate";
 import ButtonTemplate from "../objects/ButtonTemplate";
 import { Button, ButtonURL } from "../objects/Button";
 
-import { option_digitalWallet } from "../public/data/digital_wallet";
+import { option_digitalWallet, message_VNPAY, option_VNPAY } from "../public/data/digital_wallet";
 
 const checkMessage = (message) => {
     if(message.slice(0,8).toLowerCase() === "feedback")
@@ -96,10 +96,19 @@ const handleDigitalWallet = (sender_psid) => {
     }
     callSendAPI(sender_psid, response);
 }
+const handleShowVNPAY = (sender_psid) => {
+    let response = message_VNPAY;
+    callSendAPI(response);
+    response = {
+        "attachment" : option_VNPAY
+    }
+    callSendAPI(sender_psid, response);
+}
 
 module.exports = {
     handleGetStarted,
     checkMessage,
     handleDigitalWallet,
+    handleShowVNPAY,
     option_Finance,
 }

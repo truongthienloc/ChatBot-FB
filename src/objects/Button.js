@@ -6,9 +6,6 @@ export function Button(title, payload) {
     })
 }
 export function ButtonURL(title, url) {
-    this.type = buttonType.WEB_URL;
-    this.title = title,
-    this.url = url;
     return ({
         "type" : buttonType.WEB_URL,
         "title" : title,
