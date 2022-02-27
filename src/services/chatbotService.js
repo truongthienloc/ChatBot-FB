@@ -125,7 +125,7 @@ const handleDigitalWallet = (sender_psid) => {
 }
 const handleShowVNPAY = async(sender_psid) => {
     const username = await getUserName(sender_psid);
-    const gender = await getGender(sender_psid);
+    const gender = await getGender(sender_psid) || "unknown";
     const profile_pic = await getProfilePic(sender_psid);
     const data = {
         appName : "VNPAY",
