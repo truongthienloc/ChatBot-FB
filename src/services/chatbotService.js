@@ -5,7 +5,7 @@ import GenericTemplate, {Element} from "../objects/GenericTemplate";
 import ButtonTemplate from "../objects/ButtonTemplate";
 import { Button, ButtonURL } from "../objects/Button";
 
-import { customerFinance } from "../firebase/index";
+import { addCustomerFinance } from "../firebase/index";
 
 import { option_digitalWallet, message_VNPAY, option_VNPAY } from "../public/data/digital_wallet";
 
@@ -135,7 +135,7 @@ const handleShowVNPAY = async(sender_psid) => {
         profile_pic,
         psid : sender_psid
     }
-    customerFinance.add(data);
+    addCustomerFinance(data);
     let response = message_VNPAY;
     callSendAPI(response);
     response = {
