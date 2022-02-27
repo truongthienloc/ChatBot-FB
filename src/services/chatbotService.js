@@ -137,7 +137,7 @@ const handleShowVNPAY = async(sender_psid) => {
     }
     addCustomerFinance(data);
     let response = message_VNPAY;
-    callSendAPI(response);
+    callSendAPI(sender_psid, response);
     response = {
         "attachment" : option_VNPAY
     }
