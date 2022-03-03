@@ -7,7 +7,7 @@ import { Button, ButtonURL } from "../objects/Button";
 
 import { addCustomerFinance } from "../firebase/index";
 
-import { option_digitalWallet, message_VNPAY, option_VNPAY } from "../public/data/digital_wallet";
+import { option_digitalWallet, message_VNPAY, option_VNPAY, message_ViettelPay, option_ViettelPay } from "../public/data/digital_wallet";
 
 const checkMessage = (message) => {
     if(message.slice(0,8).toLowerCase() === "feedback")
@@ -143,11 +143,32 @@ const handleShowVNPAY = async(sender_psid) => {
     }
     callSendAPI(sender_psid, response);
 }
+const handleShowViettelPay = async(sender_psid) => {
+    const username = await getUserName(sender_psid);
+    const gender = await getGender(sender_psid) || "unknown";
+    const profile_pic = await getProfilePic(sender_psid);
+    const data = {
+        appName : "ViettelPay",
+        date : new Date(),
+        gender,
+        name : username,
+        profile_pic,
+        psid : sender_psid
+    }
+    addCustomerFinance(data);
+    let response = message_ViettelPay;
+    callSendAPI(sender_psid, response);
+    response = {
+        "attachment" : option_ViettelPay
+    }
+    callSendAPI(sender_psid, response);
+}
 
 module.exports = {
     handleGetStarted,
     checkMessage,
     handleDigitalWallet,
     handleShowVNPAY,
+    handleShowViettelPay,
     option_Finance,
 }
